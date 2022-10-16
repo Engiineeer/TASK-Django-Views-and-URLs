@@ -21,5 +21,5 @@ from products.views import get_product
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("home/", views.get_home),
-    path("products/<int:product_id>", views.get_product),
+    path("product-detail/<int:product_id>", views.get_product),
 ]

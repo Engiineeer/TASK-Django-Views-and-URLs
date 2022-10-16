@@ -1,3 +1,4 @@
+from math import prod
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -9,7 +10,21 @@ def get_home(request):
 
 
 def get_product(request, product_id):
-    product = Product.objects.get(id=product_id)
-    return HttpResponse(
-        f"<h1>product name {product.name} and price{product.price}</h1>"
-    )
+    product = (Product.objects.get(id=product_id),)
+    context = {
+        "product": {
+            "name": product.name,
+            "description": product.description,
+            "price": product.price,
+        }
+    }
+    return render(request, "product_detail.html", context)
+
+
+def get_products(request):
+    products = Product.objects.all()
+    new_products = []
+    for product in products:
+        new_products.append({"name": product.name, "price": product.price})
+    context = {"products": new_products}
+    return render(request, "product-list.html", context)
