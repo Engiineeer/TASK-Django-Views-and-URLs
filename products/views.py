@@ -10,7 +10,7 @@ def get_home(request):
 
 
 def get_product(request, product_id):
-    product = (Product.objects.get(id=product_id),)
+    product = Product.objects.get(id=product_id)
     context = {
         "product": {
             "name": product.name,
